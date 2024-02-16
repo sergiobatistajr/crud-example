@@ -1,22 +1,21 @@
 "use client";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { Trash2 } from "lucide-react";
 import { deletePost } from "~/lib/actions";
-
 export function LisPost({ post }: { post: any }) {
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <Link className="text-3xl font-bold" href={String(post.id)}>
           {post.name}
         </Link>
-        <Button
-          className="h-2 w-2"
-          variant="destructive"
-          onClick={() => deletePost(post.id)}
-        >
-          X
-        </Button>
+        <form action={deletePost}>
+          <input className="sr-only" name="id" defaultValue={post.id} />
+          <Button type="submit" variant="ghost" size="sm">
+            <Trash2 />
+          </Button>
+        </form>
       </div>
     </div>
   );

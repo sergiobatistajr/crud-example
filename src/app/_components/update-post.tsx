@@ -44,6 +44,7 @@ export function UpdatePost({ post }: { post: any }) {
       id: Number(values.id),
       name: values.name,
     });
+    router.push("/");
   }
   return (
     <Form {...form}>
@@ -53,7 +54,6 @@ export function UpdatePost({ post }: { post: any }) {
           name="id"
           render={({ field }) => (
             <FormItem className="sr-only">
-              <FormLabel>Titulo</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -65,7 +65,7 @@ export function UpdatePost({ post }: { post: any }) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Titulo</FormLabel>
+              <FormLabel>Novo titulo</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
