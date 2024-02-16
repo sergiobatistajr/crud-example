@@ -23,7 +23,14 @@ const schema = z.object({
   }),
 });
 
-export function UpdatePost({ post }: { post: any }) {
+export function UpdatePost({
+  post,
+}: {
+  post: {
+    id: number;
+    name: string;
+  };
+}) {
   const router = useRouter();
 
   const updatePost = api.post.update.useMutation({

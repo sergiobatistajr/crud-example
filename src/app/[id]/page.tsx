@@ -1,7 +1,7 @@
 import { api } from "~/trpc/server";
 import { UpdatePost } from "../_components/update-post";
 import { notFound } from "next/navigation";
-export default async function ({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const post = await api.post.getById.query({ id: Number(params.id) });
   if (!post) notFound();
   return (
