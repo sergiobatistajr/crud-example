@@ -6,16 +6,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    // url       = env("POSTGRES_PRISMA_URL")
+    // directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
+model Payment {
+    id        String   @id @default(uuid())
+    email     String
+    amount    Float
+    status    String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@index([name])
+    @@index([email])
 }
