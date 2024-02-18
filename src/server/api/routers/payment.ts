@@ -65,7 +65,6 @@ export const paymentRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
       return ctx.db.payment.findMany({
         where: {
           OR: [
