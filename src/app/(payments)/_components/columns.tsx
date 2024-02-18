@@ -2,11 +2,12 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ActionColumn } from "./action-column";
+import { Badge } from "~/components/ui/badge";
 
 export type Pagamento = {
   id: string;
   valor: string;
-  status: string;
+  status: "pending" | "confirmed" | "canceled";
   email: string;
   amount: number;
 };
@@ -26,6 +27,11 @@ export const columns: ColumnDef<Pagamento>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => {
+      const payment = row.original;
+
+      return <Badge>{payment.status}</Badge>;
+    },
   },
   {
     id: "actions",

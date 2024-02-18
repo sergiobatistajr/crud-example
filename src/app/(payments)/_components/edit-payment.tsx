@@ -58,7 +58,7 @@ export function EditPayment(payment: Pagamento) {
       email: data.email,
       amount: Number(data.amount),
 
-      status: data.status as string,
+      status: data.status,
     });
   }
   const isLoading = form.formState.isSubmitting;
