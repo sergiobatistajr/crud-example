@@ -16,8 +16,11 @@ export default async function Page({
   };
 }) {
   noStore();
-  const query = searchParams?.query ?? "";
-  const currentPage = Number(searchParams?.page) ?? 1;
+  // eslint-disable-next-line
+  const query = searchParams?.query || "";
+  // eslint-disable-next-line
+  const currentPage = Number(searchParams?.page) || 1;
+  console.log("currentPage", currentPage);
   const totalPages = await getPagination(query);
   return (
     <main className="min-h-screen p-8">
