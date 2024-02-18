@@ -2,13 +2,13 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ActionColumn } from "./action-column";
-import { Check, Clock4, XCircle } from "lucide-react";
 
 export type Pagamento = {
   id: string;
   valor: string;
   status: string;
   email: string;
+  amount: number;
 };
 export const columns: ColumnDef<Pagamento>[] = [
   {

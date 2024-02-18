@@ -22,6 +22,7 @@ export default async function Home() {
       email: payment.email,
       status: payment.status,
       valor: formatCurrencyBRL(payment.amount),
+      amount: payment.amount,
     };
   });
 
@@ -30,7 +31,7 @@ export default async function Home() {
       <div>
         <div className="mb-2 flex flex-1 items-center justify-between">
           <Input
-            className="w-1/6 text-gray-50"
+            className="w-1/6"
             placeholder="Buscar por email..."
             type="text"
           />

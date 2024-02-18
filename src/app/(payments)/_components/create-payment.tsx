@@ -27,6 +27,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 const formSchema = z.object({
   email: z.string().email(),
   amount: z.coerce.number(),
@@ -34,11 +35,12 @@ const formSchema = z.object({
 });
 
 export function CreatePaymentPopover() {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const createPayment = api.payment.create.useMutation({
     onSuccess: () => {
-      form.reset();
       router.refresh();
+      setOpen(false);
     },
   });
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,7 +57,7 @@ export function CreatePaymentPopover() {
   }
   let isLoading = form.formState.isSubmitting;
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button>Criar pagamento</Button>
       </PopoverTrigger>
@@ -87,6 +89,7 @@ export function CreatePaymentPopover() {
                             {...field}
                           />
                         </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -96,7 +99,7 @@ export function CreatePaymentPopover() {
                     render={({ field }) => (
                       <FormItem className="grid grid-cols-3 items-center gap-4">
                         <FormLabel asChild>
-                          <Label htmlFor="status">Valor</Label>
+                          <Label htmlFor="amount">Valor</Label>
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -105,6 +108,7 @@ export function CreatePaymentPopover() {
                             {...field}
                           />
                         </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
