@@ -1,6 +1,11 @@
 "use client";
-
-import { Delete, FilePenLine, MoreHorizontal, Settings2 } from "lucide-react";
+import {
+  Copy,
+  Delete,
+  FilePenLine,
+  MoreHorizontal,
+  Settings2,
+} from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -29,13 +34,14 @@ export function ActionColumn(payment: Pagamento) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel className="flex gap-2">
-              <Settings2 className="h-4 w-4" />
               <span>Acoes</span>
             </DropdownMenuLabel>
             <DropdownMenuItem
+              className="flex gap-2"
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copiar id do pagamento
+              <Copy className="h-4 w-4" />
+              <span>Copiar id do pagamento</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DialogTrigger asChild>

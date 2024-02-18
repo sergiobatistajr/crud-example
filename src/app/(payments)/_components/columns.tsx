@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ActionColumn } from "./action-column";
+import { ActionColumn } from "./ActionColumn";
 import { Badge } from "~/components/ui/badge";
 
 export type Pagamento = {
