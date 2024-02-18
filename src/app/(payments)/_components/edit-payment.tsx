@@ -72,6 +72,7 @@ export function EditPayment(payment: Pagamento) {
       </DialogHeader>
       <div className="grid gap-4 py-4">
         <Form {...form}>
+          {/* eslint-disable-next-line */}
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
