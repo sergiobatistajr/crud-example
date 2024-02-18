@@ -13,8 +13,8 @@ import {
 import { Pagamento } from "./columns";
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import { EditPayment } from "./edit-payment";
-import { DeletePayment } from "./delete-paymente";
 import { AlertDialog, AlertDialogTrigger } from "~/components/ui/alert-dialog";
+import { DeletePayment } from "./delete-payment";
 
 export function ActionColumn(payment: Pagamento) {
   return (

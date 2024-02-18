@@ -35,12 +35,10 @@ const formSchema = z.object({
 });
 
 export function CreatePaymentPopover() {
-  const [open, setOpen] = useState(false);
   const router = useRouter();
   const createPayment = api.payment.create.useMutation({
     onSuccess: () => {
       router.refresh();
-      setOpen(false);
     },
   });
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,9 +53,9 @@ export function CreatePaymentPopover() {
   function onSubmit(data: z.infer<typeof formSchema>) {
     createPayment.mutate({ ...data });
   }
-  let isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting;
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button>Criar pagamento</Button>
       </PopoverTrigger>

@@ -1,48 +1,40 @@
 import { unstable_noStore as noStore } from "next/cache";
-import { DataTable } from "./_components/data-table";
-import { Pagamento, columns } from "./_components/columns";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { formatCurrencyBRL } from "~/lib/utils";
 import { CreatePaymentPopover } from "./_components/create-payment";
+import Search from "~/components/Search";
+import { Suspense } from "react";
+import TablePayment from "./_components/table-payment";
+import { SkeletonPayment } from "./_components/skeleton-payment";
+import Pagination from "./_components/pagination";
 import { api } from "~/trpc/server";
-type Payment = {
-  id: string;
-  email: string;
-  status: string;
-  amount: number;
-};
 
-export default async function Home() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
   noStore();
-  const payments = await getData();
-  const formattedPayments: Pagamento[] = payments.map((payment) => {
-    return {
-      id: payment.id,
-      email: payment.email,
-      status: payment.status,
-      valor: formatCurrencyBRL(payment.amount),
-      amount: payment.amount,
-    };
-  });
-
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = await getPagination(query);
   return (
     <main className="min-h-screen p-8">
-      <div>
-        <div className="mb-2 flex flex-1 items-center justify-between">
-          <Input
-            className="w-1/6"
-            placeholder="Buscar por email..."
-            type="text"
-          />
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-1 justify-between">
+          <Search placeholder="Buscar por email e status..." />
           <CreatePaymentPopover />
         </div>
-        <DataTable data={formattedPayments} columns={columns} />
+        <Suspense key={query + currentPage} fallback={<SkeletonPayment />}>
+          <TablePayment query={query} currentPage={currentPage} />
+          <Pagination totalPages={totalPages} />
+        </Suspense>
       </div>
     </main>
   );
 }
-async function getData(): Promise<Payment[]> {
-  const payments = await api.payment.getWithPagination.query();
-  return payments;
+async function getPagination(query: string) {
+  const totalPages = await api.payment.getPages.query({ query });
+  return totalPages;
 }
