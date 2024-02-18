@@ -60,7 +60,7 @@ export function EditPayment(payment: Pagamento) {
       status: data.status,
     });
   }
-  const isLoading = form.formState.isSubmitting;
+  const isSubmitting = form.formState.isSubmitting;
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
@@ -72,7 +72,6 @@ export function EditPayment(payment: Pagamento) {
       </DialogHeader>
       <div className="grid gap-4 py-4">
         <Form {...form}>
-          {/* eslint-disable-next-line */}
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
@@ -159,8 +158,8 @@ export function EditPayment(payment: Pagamento) {
               )}
             />
             <div className="flex justify-end">
-              <Button type="submit">
-                {isLoading ? "Salvando..." : "Salvar"}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Salvando..." : "Salvar"}
               </Button>
             </div>
           </form>

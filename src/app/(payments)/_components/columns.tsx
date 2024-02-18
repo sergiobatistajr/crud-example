@@ -1,13 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ActionColumn } from "./ActionColumn";
 import { Badge } from "~/components/ui/badge";
+import { ActionColumn } from "./action-column";
 
 export type Pagamento = {
   id: string;
   valor: string;
-  status: "pending" | "confirmed" | "canceled";
+  status: string;
   email: string;
   amount: number;
 };
