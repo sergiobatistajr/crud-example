@@ -33,7 +33,7 @@ const formSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
   amount: z.coerce.number(),
-  status: z.enum(["pending", "confirmed", "canceled"]),
+  status: z.string(),
 });
 export function EditPayment(payment: Pagamento) {
   const router = useRouter();
