@@ -60,7 +60,9 @@ export function EditPayment(payment: Pagamento) {
       status: data.status,
     });
   }
+
   const isSubmitting = form.formState.isSubmitting;
+
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
