@@ -16,8 +16,8 @@ export default async function Page({
   };
 }) {
   noStore();
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query ?? "";
+  const currentPage = Number(searchParams?.page) ?? 1;
   const totalPages = await getPagination(query);
   return (
     <main className="min-h-screen p-8">

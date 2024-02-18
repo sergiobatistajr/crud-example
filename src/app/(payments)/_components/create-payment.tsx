@@ -27,7 +27,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 const formSchema = z.object({
   email: z.string().email(),
   amount: z.coerce.number(),

@@ -49,7 +49,7 @@ export function EditPayment(payment: Pagamento) {
       id: payment.id,
       email: payment.email,
       amount: payment.amount,
-      status: payment.status as any,
+      status: payment.status,
     },
   });
   function onSubmit(data: z.infer<typeof formSchema>) {
@@ -57,10 +57,11 @@ export function EditPayment(payment: Pagamento) {
       id: data.id,
       email: data.email,
       amount: Number(data.amount),
-      status: data.status,
+
+      status: data.status as string,
     });
   }
-  let isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting;
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
