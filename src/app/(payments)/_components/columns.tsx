@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "~/components/ui/badge";
 import { ActionColumn } from "./action-column";
+import clsx from "clsx";
 
 export type Pagamento = {
   id: string;
@@ -30,7 +31,16 @@ export const columns: ColumnDef<Pagamento>[] = [
     cell: ({ row }) => {
       const payment = row.original;
 
-      return <Badge>{payment.status}</Badge>;
+      return (
+        <Badge
+          className={clsx({
+            "bg-green-500": payment.status === "confirmed",
+            "bg-red-500": payment.status === "canceled",
+          })}
+        >
+          {payment.status}
+        </Badge>
+      );
     },
   },
   {
