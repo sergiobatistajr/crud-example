@@ -8,7 +8,7 @@ export const paymentRouter = createTRPCRouter({
       z.object({
         email: z.string().email().min(1),
         amount: z.coerce.number(),
-        status: z.enum(["pending", "confirmed", "canceled"]),
+        status: z.string().min(1),
       }),
     )
     .mutation(async ({ ctx, input }) => {

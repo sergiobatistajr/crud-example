@@ -27,10 +27,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
+
 const formSchema = z.object({
   email: z.string().email(),
   amount: z.coerce.number(),
-  status: z.enum(["pending", "confirmed", "canceled"]),
+  status: z.string(),
 });
 
 export function CreatePaymentPopover() {
