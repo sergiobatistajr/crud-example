@@ -57,7 +57,7 @@ export function EditPayment(payment: Pagamento) {
       id: data.id,
       email: data.email,
       amount: Number(data.amount),
-      status: data.status as string,
+      status: data.status,
     });
   }
   const isLoading = form.formState.isSubmitting;
@@ -72,7 +72,6 @@ export function EditPayment(payment: Pagamento) {
       </DialogHeader>
       <div className="grid gap-4 py-4">
         <Form {...form}>
-          // eslint-disable-next-line
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
